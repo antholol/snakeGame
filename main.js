@@ -5,13 +5,13 @@ canvas.width = canvasWidth;
 canvas.height = canvasHeight;
 
 const blockSize = 64;
-const moveDistance = 64
+const moveDistance = blockSize
 
 const slitherdingle = canvas.getContext("2d");
-let x = 128;
-let y = 128;
+let slitherX = 0;
+let slitherY = 0;
 let e = -1
-let tick = 0.5*(1000);
+let tick = (1/3)*(1000);
 let goUp = false;
 let goLeft = false;
 slitherdingle.mozImageSmoothingEnabled = false;
@@ -30,28 +30,40 @@ targetEatee.imageSmoothingEnabled = false;
 function draw(){
     targetEatee.clearRect(0,0,canvasWidth,canvasHeight)
 
+    
+
     targetEatee.fillStyle = "fuchsia";
     targetEatee.fillRect(targetX,targetY,blockSize,blockSize)
     
     slitherdingle.fillStyle = "mediumSeaGreen";
-    slitherdingle.fillRect(x,y,blockSize,blockSize)
+    slitherdingle.fillRect(slitherX,slitherY,blockSize,blockSize)
+    eaten()
 };
 
 function updatePos() {
     if (goLeft===true) {
-        x = x - moveDistance
+        slitherX = slitherX - moveDistance
     } else if (goLeft===false) {
-        x = x + moveDistance
+        slitherX = slitherX + moveDistance
     }
     if (goUp===true) {
-        y = y - moveDistance
+        slitherY = slitherY - moveDistance
     } else if (goUp===false) {
-        y = y + moveDistance
+        slitherY = slitherY + moveDistance
     }
     draw()
 };
 
+function eaten() {
+    if(slitherX == targetX && slitherY == targetY) { //then
+        slitherdingle.fillStyle = "white"
+        slitherdingle.font = "50px EB Garamond"; //REMEMBER TO CHANGE THE px IF CHANGE BLOCK SIZE SOMEONE DECIDED THAT YOU CANT ALTER SHIT BEFORE PUTTING IT IN
+        slitherdingle.fillText(">:3",(slitherX),(slitherY+blockSize));
+    }
+}
+
 function moveSet() {
+//i forgot why i made this function
 }
 
 function main(){
