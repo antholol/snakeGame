@@ -1,44 +1,50 @@
 const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
+const slitherdingle = canvas.getContext("2d");
+const targetEatee = canvas.getContext("2d");
+canvas.width = canvasWidth;
+canvas.height = canvasHeight;
 const canvasWidth = 800;
 const canvasHeight = 600;
 
 const blockSize = 64;
-const dist = 64
+const moveDistance = 64
+
+slitherdingle.fillStyle = 'grey';
 let x = 0;
 let y = 0;
-canvas.width = canvasWidth;
-canvas.height = canvasHeight;
-ctx.fillStyle = 'black';
 let e = -1
 let tick = 1*(1000);
 let goUp = false;
 let goLeft = false;
+slitherdingle.mozImageSmoothingEnabled = false;
+slitherdingle.webkitImageSmoothingEnabled = false;
+slitherdingle.msImageSmoothingEnabled = false;
+slitherdingle.imageSmoothingEnabled = false;
 
-let targetX = 50;
-let targetY = 50;
-
-ctx.mozImageSmoothingEnabled = false;
-ctx.webkitImageSmoothingEnabled = false;
-ctx.msImageSmoothingEnabled = false;
-ctx.imageSmoothingEnabled = false;
+targetEatee.fillStyle = "blue"
+let targetX = 64;
+let targetY = 64;
+targetEatee.mozImageSmoothingEnabled = false;
+targetEatee.webkitImageSmoothingEnabled = false;
+targetEatee.msImageSmoothingEnabled = false;
+targetEatee.imageSmoothingEnabled = false;
 
 function draw(){
-    ctx.clearRect(0,0,canvasWidth,canvasHeight)
-    ctx.fillRect(x,y,blockSize,blockSize)
-    ctx.fillRect(targetX,targetY,blockSize,blockSize)
+    slitherdingle.clearRect(0,0,canvasWidth,canvasHeight)
+    slitherdingle.fillRect(x,y,blockSize,blockSize)
+    targetEatee.fillRect(targetX,targetY,blockSize,blockSize)
 };
 
 function updatePos() {
     if (goLeft===true) {
-        x = x - dist
+        x = x - moveDistance
     } else if (goLeft===false) {
-        x = x + dist
+        x = x + moveDistance
     }
     if (goUp===true) {
-        y = y - dist
+        y = y - moveDistance
     } else if (goUp===false) {
-        y = y + dist
+        y = y + moveDistance
     }
     draw()
 };
