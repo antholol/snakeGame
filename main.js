@@ -5,13 +5,14 @@ canvas.width = canvasWidth;
 canvas.height = canvasHeight;
 
 const blockSize = 64;
-const moveDistance = blockSize
+const moveDistance = blockSize;
+let tick = (1/3)*(1000);
 
 const slitherdingle = canvas.getContext("2d");
 let slitherX = 0;
 let slitherY = 0;
-let e = -1
-let tick = (1/3)*(1000);
+let e = -1;
+let eatCount = 0;
 let goUp = false;
 let goLeft = false;
 slitherdingle.mozImageSmoothingEnabled = false;
@@ -56,6 +57,8 @@ function updatePos() {
 
 function eaten() {
     if(slitherX == targetX && slitherY == targetY) { //then
+        eatCount = eatCount + 1
+
         slitherdingle.fillStyle = "white"
         slitherdingle.font = "50px EB Garamond"; //REMEMBER TO CHANGE THE px IF CHANGE BLOCK SIZE SOMEONE DECIDED THAT YOU CANT ALTER SHIT BEFORE PUTTING IT IN
         slitherdingle.fillText(">:3",(slitherX),(slitherY+blockSize));
