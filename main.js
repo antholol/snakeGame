@@ -23,7 +23,7 @@ slitherdingle.imageSmoothingEnabled = false;
 //why js just making a simple 2d array so goofy ahh what is this
 const movesRow = 2**16;
 const coordinatesRow = 2;
-const prevPositions = Array(movesRow).fill().map(() => Array(coordinatesRow).fill(null));
+const prevPositions = Array(movesRow).fill().map(() => Array(coordinatesRow).fill(undefined));
 let move = movesRow; //the move err like in chess or whatever but moves left but whateverrr
 
 const targetEatee = canvas.getContext("2d");
@@ -43,7 +43,7 @@ function draw(){
     
     slitherdingle.fillStyle = "mediumSeaGreen";
     //slitherdingle.fillRect(slitherX,slitherY,blockSize,blockSize);
-    for(let i = 0; i <= (movesRow); i = i + 1) {
+    for(let i = move; i <= (move + eatCount); i = i + 1) {
         slitherdingle.fillRect(prevPositions[i][0],prevPositions[i][1],blockSize,blockSize);
     };    
     eaten();
