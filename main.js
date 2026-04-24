@@ -36,19 +36,16 @@ targetEatee.imageSmoothingEnabled = false;
 
 function draw(){
     targetEatee.clearRect(0,0,canvasWidth,canvasHeight)
-
-    
+    saveLocation();
 
     targetEatee.fillStyle = "fuchsia";
     targetEatee.fillRect(targetX,targetY,blockSize,blockSize);
     
     slitherdingle.fillStyle = "mediumSeaGreen";
-    slitherdingle.fillRect(slitherX,slitherY,blockSize,blockSize);
-    //for(let i = move; i >= 0; i = i - 1) {
-        //slitherdingle.fillRect(prevPositions[i][0],prevPositions[i][1],blockSize,blockSize);
-    //};
-   
-    updateLength();
+    //slitherdingle.fillRect(slitherX,slitherY,blockSize,blockSize);
+    for(let i = 0; i >= (movesRow); i = i + 1) {
+        slitherdingle.fillRect(prevPositions[i][0],prevPositions[i][1],blockSize,blockSize);
+    };    
     eaten();
 };
 
@@ -116,7 +113,7 @@ function eaten() {
     }
 }
 
-function updateLength() {
+function saveLocation() {
     move = move - 1;
     prevPositions[move][0] = slitherX; //DONT REMOVE THE SEMI COLON OML
     prevPositions[move][1] = slitherY;
