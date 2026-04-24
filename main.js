@@ -43,7 +43,7 @@ function draw(){
     
     slitherdingle.fillStyle = "mediumSeaGreen";
     //slitherdingle.fillRect(slitherX,slitherY,blockSize,blockSize);
-    for(let i = 0; i >= (movesRow); i = i + 1) {
+    for(let i = 0; i <= (movesRow); i = i + 1) {
         slitherdingle.fillRect(prevPositions[i][0],prevPositions[i][1],blockSize,blockSize);
     };    
     eaten();
