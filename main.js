@@ -9,9 +9,9 @@ const moveDistance = blockSize;
 let tick = (1/3)*(1000);
 
 const slitherdingle = canvas.getContext("2d");
-let slitherX = 0;
-let slitherY = 0;
-let e = -1;
+let slitherX = 0; //xpos
+let slitherY = 0; //ypos
+let e = -1; //switch
 let eatCount = 0;
 let goUp = false;
 let goLeft = false;
@@ -19,6 +19,12 @@ slitherdingle.mozImageSmoothingEnabled = false;
 slitherdingle.webkitImageSmoothingEnabled = false;
 slitherdingle.msImageSmoothingEnabled = false;
 slitherdingle.imageSmoothingEnabled = false;
+
+//why js just making a simple 2d array so goofy ahh what is this
+const movesRow = 2**16;
+const coordinatesRow = 2;
+const prevPositions = Array(movesRow).fill().map(() => Array(coordinatesRow).fill(null));
+let move = movesRow; //the move err like in chess or whatever but moves left but whateverrr
 
 const targetEatee = canvas.getContext("2d");
 let targetX = 64;
@@ -34,40 +40,16 @@ function draw(){
     
 
     targetEatee.fillStyle = "fuchsia";
-    targetEatee.fillRect(targetX,targetY,blockSize,blockSize)
+    targetEatee.fillRect(targetX,targetY,blockSize,blockSize);
     
     slitherdingle.fillStyle = "mediumSeaGreen";
-    slitherdingle.fillRect(slitherX,slitherY,blockSize,blockSize)
-    eaten()
+    for(let i = move; i >= 0; i = i - 1) {
+        slitherdingle.fillRect(prevPositions[i][0],prevPositions[i][1],blockSize,blockSize);
+    };
+   
+    move = move - 1;
+    eaten();
 };
-
-function updatePos() {
-    if (goLeft===true) {
-        slitherX = slitherX - moveDistance
-    } else if (goLeft===false) {
-        slitherX = slitherX + moveDistance
-    }
-    if (goUp===true) {
-        slitherY = slitherY - moveDistance
-    } else if (goUp===false) {
-        slitherY = slitherY + moveDistance
-    }
-    draw()
-};
-
-function eaten() {
-    if(slitherX == targetX && slitherY == targetY) { //then
-        eatCount = eatCount + 1
-
-        slitherdingle.fillStyle = "white"
-        slitherdingle.font = "50px EB Garamond"; //REMEMBER TO CHANGE THE px IF CHANGE BLOCK SIZE SOMEONE DECIDED THAT YOU CANT ALTER SHIT BEFORE PUTTING IT IN
-        slitherdingle.fillText(">:3",(slitherX),(slitherY+blockSize));
-    }
-}
-
-function moveSet() {
-//i forgot why i made this function
-}
 
 function main(){
     document.addEventListener('keydown', (wasd) => {
@@ -108,6 +90,37 @@ function main(){
             }
     });
     setInterval(updatePos, tick)
+};
+
+function updatePos() {
+    if (goLeft===true) {
+        slitherX = slitherX - moveDistance
+    } else if (goLeft===false) {
+        slitherX = slitherX + moveDistance
+    }
+    if (goUp===true) {
+        slitherY = slitherY - moveDistance
+    } else if (goUp===false) {
+        slitherY = slitherY + moveDistance
+    }
+    draw()
+};
+
+function eaten() {
+    if(slitherX == targetX && slitherY == targetY) { //then
+        eatCount = eatCount + 1
+        updateLength()
+        slitherdingle.fillStyle = "white"
+        slitherdingle.font = "50px EB Garamond"; //REMEMBER TO CHANGE THE px IF CHANGE BLOCK SIZE SOMEONE DECIDED THAT YOU CANT ALTER SHIT BEFORE PUTTING IT IN bruh why concatenation no work :[
+        slitherdingle.fillText(">:3",(slitherX),(slitherY+blockSize));
+    }
+}
+
+function updateLength() {
+    prevPositions[move][0] = slitherX
+    prevPositions[move][1] = slitherY
+
+
 };
 
 main()
