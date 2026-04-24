@@ -43,11 +43,12 @@ function draw(){
     targetEatee.fillRect(targetX,targetY,blockSize,blockSize);
     
     slitherdingle.fillStyle = "mediumSeaGreen";
-    for(let i = move; i >= 0; i = i - 1) {
-        slitherdingle.fillRect(prevPositions[i][0],prevPositions[i][1],blockSize,blockSize);
-    };
+    slitherdingle.fillRect(slitherX,slitherY,blockSize,blockSize);
+    //for(let i = move; i >= 0; i = i - 1) {
+        //slitherdingle.fillRect(prevPositions[i][0],prevPositions[i][1],blockSize,blockSize);
+    //};
    
-    move = move - 1;
+    updateLength();
     eaten();
 };
 
@@ -109,7 +110,6 @@ function updatePos() {
 function eaten() {
     if(slitherX == targetX && slitherY == targetY) { //then
         eatCount = eatCount + 1
-        updateLength()
         slitherdingle.fillStyle = "white"
         slitherdingle.font = "50px EB Garamond"; //REMEMBER TO CHANGE THE px IF CHANGE BLOCK SIZE SOMEONE DECIDED THAT YOU CANT ALTER SHIT BEFORE PUTTING IT IN bruh why concatenation no work :[
         slitherdingle.fillText(">:3",(slitherX),(slitherY+blockSize));
@@ -117,8 +117,9 @@ function eaten() {
 }
 
 function updateLength() {
-    prevPositions[move][0] = slitherX
-    prevPositions[move][1] = slitherY
+    move = move - 1;
+    prevPositions[move][0] = slitherX; //DONT REMOVE THE SEMI COLON OML
+    prevPositions[move][1] = slitherY;
 
 
 };
