@@ -84,6 +84,7 @@ function main(){
 function oneTick() {
     updatePos();
     saveLocation();
+    invalidHandler();
     draw();
 };
 
@@ -133,9 +134,9 @@ function eaten() {
 };
 
 function invalidHandler() {
-    if (prevPositions[move][0] === prevPositions[move+1][0] && prevPositions[move][1] === prevPositions[move+1][1]) {
-        alert("you've died")
-    }
+    if ((eatCount > 1) && ((prevPositions[move][0] == prevPositions[move + 1][0])  (prevPositions[move][1] == prevPositions[move + 1][1]))) {
+        alert("You've died");
+    };
 };
 
 function gamePauseHandler() {
