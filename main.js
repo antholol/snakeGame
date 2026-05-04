@@ -6,7 +6,7 @@ canvas.height = canvasHeight;
 
 const blockSize = 64;
 const moveDistance = blockSize;
-let tick = (1/3)*(1000);
+let tick = (1/4)*(1000);
 
 const slitherdingle = canvas.getContext("2d");
 let slitherX = 0; //xpos
@@ -37,6 +37,8 @@ targetEatee.imageSmoothingEnabled = false;
 function draw(){
     targetEatee.clearRect(0,0,canvasWidth,canvasHeight)
     saveLocation();
+    canvas.getContext("2d").fillStyle = "navy";
+    canvas.getContext("2d").fillRect(0,0,canvasWidth,canvasHeight)
 
     targetEatee.fillStyle = "fuchsia";
     targetEatee.fillRect(targetX,targetY,blockSize,blockSize);
