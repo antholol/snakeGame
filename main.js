@@ -6,7 +6,7 @@ canvas.height = canvasHeight;
 
 const blockSize = 64;
 const moveDistance = blockSize;
-let tick = (1/4)*(1000);
+let tick = (1/12.5)*(1000);
 
 const slitherdingle = canvas.getContext("2d");
 let slitherX = 0; //xpos
@@ -37,10 +37,10 @@ targetEatee.imageSmoothingEnabled = false;
 function draw(){
     targetEatee.clearRect(0,0,canvasWidth,canvasHeight)
     saveLocation();
-    canvas.getContext("2d").fillStyle = "navy";
+    canvas.getContext("2d").fillStyle = "midnightblue";
     canvas.getContext("2d").fillRect(0,0,canvasWidth,canvasHeight)
 
-    targetEatee.fillStyle = "fuchsia";
+    targetEatee.fillStyle = "goldenrod";
     targetEatee.fillRect(targetX,targetY,blockSize,blockSize);
     
     slitherdingle.fillStyle = "mediumSeaGreen";
@@ -51,43 +51,47 @@ function draw(){
     eaten();
 };
 
-function main(){
-    document.addEventListener('keydown', (wasd) => {
-        if (wasd.key==='e') {
-            e = e * -1
-        }
-        if (e===-1) {
-                if (wasd.key === 'd') {
-                    goUp = null
-                    goLeft = false
-                }
-                if (wasd.key === 'a') {
-                    goUp = null
-                    goLeft = true
-                }
-                if (wasd.key === 's') {
-                    goLeft = null
-                    goUp = false
-                }
-                if (wasd.key === 'w') {
-                    goLeft = null
-                    goUp = true
-                }
+function main(){    
+    document.addEventListener('keydown', //makes it clearer for my vb.net ahh
+        function(keyboardInputs) {
+            if (keyboardInputs.key==='e') {
+                e = e * -1
             }
-            if (e===1) {
-                if (wasd.key === 'd') {
-                    goLeft = false
+            if (e===-1) {
+                    if (keyboardInputs.key === 'd') {
+                        goUp = null
+                        goLeft = false
+                    }
+                    if (keyboardInputs.key === 'a') {
+                        goUp = null
+                        goLeft = true
+                    }
+                    if (keyboardInputs.key === 's') {
+                        goLeft = null
+                        goUp = false
+                    }
+                    if (keyboardInputs.key === 'w') {
+                        goLeft = null
+                        goUp = true
+                    }
                 }
-                if (wasd.key === 'a') {
-                    goLeft = true
+                if (e===1) {
+                    if (keyboardInputs.key === 'd') {
+                        goLeft = false
+                    }
+                    if (keyboardInputs.key === 'a') {
+                        goLeft = true
+                    }
+                    if (keyboardInputs.key === 's') {
+                        goUp = false
+                    }
+                    if (keyboardInputs.key === 'w') {
+                        goUp = true
+                    }
                 }
-                if (wasd.key === 's') {
-                    goUp = false
+                if (keyboardInputs.key === 'Escape') {
+                    alert("You have paused! Click 'OK' to resume :3");
                 }
-                if (wasd.key === 'w') {
-                    goUp = true
-                }
-            }
     });
     setInterval(updatePos, tick)
 };
