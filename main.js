@@ -89,7 +89,7 @@ function main(){
                         goUp = true
                     }
                 }
-                if (keyboardInputs.key === 'Escape') {
+                if (keyboardInputs.key === 'q') {
                     alert("You have paused! Click 'OK' to resume :3");
                 }
     });
