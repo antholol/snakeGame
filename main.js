@@ -128,7 +128,7 @@ function eaten() {
     if(slitherX == targetX && slitherY == targetY) { //then
         eatCount = eatCount + 1
         slitherdingle.fillStyle = "white"
-        slitherdingle.font = "50px EB Garamond"; //REMEMBER TO CHANGE THE px IF CHANGE BLOCK SIZE SOMEONE DECIDED THAT YOU CANT ALTER SHIT BEFORE PUTTING IT IN bruh why concatenation no work :[
+        slitherdingle.font = "50px Garamond"; //REMEMBER TO CHANGE THE px IF CHANGE BLOCK SIZE SOMEONE DECIDED THAT YOU CANT ALTER SHIT BEFORE PUTTING IT IN bruh why concatenation no work :[
         slitherdingle.fillText(">:3",(slitherX),(slitherY+blockSize));
     }
 };
