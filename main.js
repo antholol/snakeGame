@@ -84,7 +84,7 @@ function main(){
 function oneTick() {
     updatePos();
     saveLocation();
-    //invalidHandler();
+    invalidHandler();
     draw();
 };
 
@@ -134,7 +134,10 @@ function eaten() {
 };
 
 function invalidHandler() {
-    if ((eatCount > 1) && ((prevPositions[move][0] == prevPositions[move + 1][0])  (prevPositions[move][1] == prevPositions[move + 1][1]))) {
+    const prevSlitherX = prevPositions[(move + 2)][0]
+    const prevSlitherY = prevPositions[(move + 2)][1]
+
+    if ((eatCount > 1) && ((slitherX == prevSlitherX) && (slitherY == prevSlitherY))) {
         alert("You've died");
     };
 };
