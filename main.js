@@ -84,7 +84,7 @@ function main(){
 function oneTick() {
     updatePos();
     saveLocation();
-    invalidHandler();
+    //invalidHandler();
     draw();
 };
 
