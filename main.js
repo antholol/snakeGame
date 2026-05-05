@@ -34,22 +34,7 @@ targetEatee.webkitImageSmoothingEnabled = false;
 targetEatee.msImageSmoothingEnabled = false;
 targetEatee.imageSmoothingEnabled = false;
 
-function draw(){
-    targetEatee.clearRect(0,0,canvasWidth,canvasHeight)
-    saveLocation();
-    canvas.getContext("2d").fillStyle = "midnightblue";
-    canvas.getContext("2d").fillRect(0,0,canvasWidth,canvasHeight)
 
-    targetEatee.fillStyle = "goldenrod";
-    targetEatee.fillRect(targetX,targetY,blockSize,blockSize);
-    
-    slitherdingle.fillStyle = "mediumSeaGreen";
-    //slitherdingle.fillRect(slitherX,slitherY,blockSize,blockSize);
-    for(let i = move; i <= (move + eatCount); i = i + 1) {
-        slitherdingle.fillRect(prevPositions[i][0],prevPositions[i][1],blockSize,blockSize);
-    };    
-    eaten();
-};
 
 function main(){    
     document.addEventListener('keydown', //makes it clearer for my vb.net ahh
@@ -89,11 +74,18 @@ function main(){
                         goUp = true
                     }
                 }
-                if (keyboardInputs.key === 'q') {
+                if (keyboardInputs.key === 'q' || keyboardInputs.key === "Escape" || keyboardInputs.key === "Enter") {
                     alert("You have paused! Click 'OK' to resume :3");
                 }
     });
-    setInterval(updatePos, tick)
+    setInterval(oneTick, tick)
+};
+
+function oneTick() {
+    updatePos();
+    saveLocation();
+    //invalidHandler();
+    draw();
 };
 
 function updatePos() {
@@ -106,8 +98,30 @@ function updatePos() {
         slitherY = slitherY - moveDistance
     } else if (goUp===false) {
         slitherY = slitherY + moveDistance
-    }
-    draw()
+    }    
+};
+
+function saveLocation() {
+    move = move - 1;
+    prevPositions[move][0] = slitherX; //DONT REMOVE THE SEMI COLON OML
+    prevPositions[move][1] = slitherY;
+};
+
+function draw(){
+    targetEatee.clearRect(0,0,canvasWidth,canvasHeight)
+    
+    canvas.getContext("2d").fillStyle = "midnightblue";
+    canvas.getContext("2d").fillRect(0,0,canvasWidth,canvasHeight)
+
+    targetEatee.fillStyle = "goldenrod";
+    targetEatee.fillRect(targetX,targetY,blockSize,blockSize);
+    
+    slitherdingle.fillStyle = "mediumSeaGreen";
+    //slitherdingle.fillRect(slitherX,slitherY,blockSize,blockSize);
+    for(let i = move; i <= (move + eatCount); i = i + 1) {
+        slitherdingle.fillRect(prevPositions[i][0],prevPositions[i][1],blockSize,blockSize);
+    };
+    eaten();
 };
 
 function eaten() {
@@ -117,13 +131,15 @@ function eaten() {
         slitherdingle.font = "50px EB Garamond"; //REMEMBER TO CHANGE THE px IF CHANGE BLOCK SIZE SOMEONE DECIDED THAT YOU CANT ALTER SHIT BEFORE PUTTING IT IN bruh why concatenation no work :[
         slitherdingle.fillText(">:3",(slitherX),(slitherY+blockSize));
     }
-}
+};
 
-function saveLocation() {
-    move = move - 1;
-    prevPositions[move][0] = slitherX; //DONT REMOVE THE SEMI COLON OML
-    prevPositions[move][1] = slitherY;
+function invalidHandler() {
+    if ((eatCount > 1) && ((prevPositions[move][0] == prevPositions[move + 1][0])  (prevPositions[move][1] == prevPositions[move + 1][1]))) {
+        alert("You've died");
+    };
+};
 
+function gamePauseHandler() {
 
 };
 
