@@ -115,7 +115,7 @@ function draw(){
     canvas.getContext("2d").fillStyle = "midnightblue";
     canvas.getContext("2d").fillRect(0,0,canvasWidth,canvasHeight);
 
-    targetEatee.fillStyle = "goldenrod";
+    targetEatee.fillStyle = "yellow";
     targetEatee.fillRect(targetX,targetY,blockSize,blockSize);
     
     slitherdingle.fillStyle = "mediumSeaGreen";
@@ -124,6 +124,7 @@ function draw(){
         slitherdingle.fillRect(prevPositions[i][0],prevPositions[i][1],blockSize,blockSize);
     };
     eaten();
+    document.getElementById("comboText").innerHTML = eatCount + "x combo!";
 };
 
 function eaten() {
