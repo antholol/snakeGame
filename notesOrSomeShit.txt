@@ -1,3 +1,6 @@
 notes or some shit
 - make pause menu?
 or something idk
+
+eatee behaviour
+also realised javascript just doens't give 2 shits about a function that doesnt exist it just exits bruh

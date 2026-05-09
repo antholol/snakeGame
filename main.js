@@ -34,8 +34,6 @@ targetEatee.webkitImageSmoothingEnabled = false;
 targetEatee.msImageSmoothingEnabled = false;
 targetEatee.imageSmoothingEnabled = false;
 
-
-
 function main(){    
     document.addEventListener('keydown', //makes it clearer for my vb.net ahh
         function(keyboardInputs) {
@@ -111,40 +109,33 @@ function draw(){
     targetEatee.clearRect(0,0,canvasWidth,canvasHeight)
     
     canvas.getContext("2d").fillStyle = "midnightblue";
-    canvas.getContext("2d").fillRect(0,0,canvasWidth,canvasHeight)
+    canvas.getContext("2d").fillRect(0,0,canvasWidth,canvasHeight);
 
-    eateeBehaviour()
+    targetEatee.fillStyle = "goldenrod";
+    targetEatee.fillRect(targetX,targetY,blockSize,blockSize);
     
     slitherdingle.fillStyle = "mediumSeaGreen";
-    //slitherdingle.fillRect(slitherX,slitherY,blockSize,blockSize);
+    slitherdingle.fillRect(slitherX,slitherY,blockSize,blockSize);
     for(let i = move; i <= (move + eatCount); i = i + 1) {
         slitherdingle.fillRect(prevPositions[i][0],prevPositions[i][1],blockSize,blockSize);
     };
     eaten();
 };
 
-function eateeBehaviour() {
-    let randX = blockSize
-    let randY = blockSize
-    
-    targetEatee.fillStyle = "goldenrod";
-    /*
-    randX = canvasWidth * (Math.random())
-    randX = Math.round(randX)
-    randX = Math.floor(randX / 64) //okay this is ridiculous what in the js is this vb.net ftw what the shit
-    randX = randX * blockSize
-
-    randY = canvasHeight * (Math.random())
-    randY = Math.round(randY)
-    randY = Math.floor(randY / 64)
-    randY = randY * blockSize
-    */
-    targetEatee.fillRect(randX,randY,blockSize,blockSize);
-}
-
 function eaten() {
     if(slitherX == targetX && slitherY == targetY) { //then
         eatCount = eatCount + 1
+
+        targetX = canvasWidth * (Math.random())
+        targetX = Math.round(targetX)
+        targetX = Math.floor(targetX / 64) //okay this is ridiculous what in the js is this vb.net ftw what the shit
+        targetX = targetX * blockSize
+
+        targetY = canvasHeight * (Math.random())
+        targetY = Math.round(targetY)
+        targetY = Math.floor(targetY / 64)
+        targetY = targetY * blockSize
+
         slitherdingle.fillStyle = "white"
         slitherdingle.font = "50px Garamond"; //REMEMBER TO CHANGE THE px IF CHANGE BLOCK SIZE SOMEONE DECIDED THAT YOU CANT ALTER SHIT BEFORE PUTTING IT IN bruh why concatenation no work :[
         slitherdingle.fillText(">:3",(slitherX),(slitherY+blockSize));
