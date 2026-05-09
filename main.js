@@ -34,6 +34,8 @@ targetEatee.webkitImageSmoothingEnabled = false;
 targetEatee.msImageSmoothingEnabled = false;
 targetEatee.imageSmoothingEnabled = false;
 
+alert("Game is go");
+
 function main(){    
     document.addEventListener('keydown', //makes it clearer for my vb.net ahh
         function(keyboardInputs) {
@@ -82,7 +84,9 @@ function main(){
 function oneTick() {
     updatePos();
     saveLocation();
-    invalidHandler();
+    if (1 < eatCount) {
+        invalidHandler();
+    }
     draw();
 };
 
@@ -143,8 +147,9 @@ function eaten() {
 };
 
 function invalidHandler() {
-    const prevSlitherX = prevPositions[(move + 2)][0]
-    const prevSlitherY = prevPositions[(move + 2)][1]
+    let prevMove = (move + 2);
+    const prevSlitherX = prevPositions[prevMove][0];
+    const prevSlitherY = prevPositions[prevMove][1];
 
     if ((eatCount > 1) && ((slitherX == prevSlitherX) && (slitherY == prevSlitherY))) {
         alert("You've died");
