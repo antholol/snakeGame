@@ -1,6 +1,6 @@
 const canvas = document.getElementById("canvas");
-const canvasWidth = 800;
-const canvasHeight = 600;
+const canvasWidth = 832;
+const canvasHeight = 640;
 canvas.width = canvasWidth;
 canvas.height = canvasHeight;
 
@@ -113,8 +113,7 @@ function draw(){
     canvas.getContext("2d").fillStyle = "midnightblue";
     canvas.getContext("2d").fillRect(0,0,canvasWidth,canvasHeight)
 
-    targetEatee.fillStyle = "goldenrod";
-    targetEatee.fillRect(targetX,targetY,blockSize,blockSize);
+    eateeBehaviour()
     
     slitherdingle.fillStyle = "mediumSeaGreen";
     //slitherdingle.fillRect(slitherX,slitherY,blockSize,blockSize);
@@ -123,6 +122,25 @@ function draw(){
     };
     eaten();
 };
+
+function eateeBehaviour() {
+    let randX = blockSize
+    let randY = blockSize
+    
+    targetEatee.fillStyle = "goldenrod";
+    /*
+    randX = canvasWidth * (Math.random())
+    randX = Math.round(randX)
+    randX = Math.floor(randX / 64) //okay this is ridiculous what in the js is this vb.net ftw what the shit
+    randX = randX * blockSize
+
+    randY = canvasHeight * (Math.random())
+    randY = Math.round(randY)
+    randY = Math.floor(randY / 64)
+    randY = randY * blockSize
+    */
+    targetEatee.fillRect(randX,randY,blockSize,blockSize);
+}
 
 function eaten() {
     if(slitherX == targetX && slitherY == targetY) { //then
